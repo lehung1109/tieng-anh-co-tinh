@@ -1,7 +1,9 @@
+import Header from "@/components/header";
+
 export default function Home() {
   return (
     <div className="relative z-10 flex min-h-svh flex-col">
-      <header>header</header>
+      <Header />
       <main className="flex-1">
         main content
       </main>
