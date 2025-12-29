@@ -1,3 +1,5 @@
+'use server';
+
 export const contactFormFunction = async (previousState: string, formData: FormData) => {
   const name = formData.get("name");
   const email = formData.get("email");
