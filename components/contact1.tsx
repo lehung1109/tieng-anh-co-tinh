@@ -1,12 +1,13 @@
 import { Form } from "@/components/form";
 
 interface Contact1Props {
+  id?: string;
   className?: string;
 }
 
-const Contact1 = ({ className }: Contact1Props) => {
+const Contact1 = ({ id, className }: Contact1Props) => {
   return (
-    <section className={className}>
+    <section id={id} className={className}>
       <div className="container">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-10 lg:flex-row lg:gap-20">
           <div className="flex lg:max-w-1/2 flex-col justify-between gap-10">

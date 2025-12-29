@@ -2,13 +2,14 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Check } from "lucide-react";
 
 interface Cta1Props {
+  id?: string;
   href?: string;
   className?: string;
 }
 
-const Cta1 = ({ href = "#", className = "" }: Cta1Props) => {
+const Cta1 = ({ id, href = "#", className = "" }: Cta1Props) => {
   return (
-    <section className={className}>
+    <section id={id} className={className}>
       <div className="container">
         <div className="flex flex-col items-start justify-between gap-8 rounded-lg bg-muted px-6 py-10 md:flex-row lg:px-20 lg:py-16">
           <div className="md:w-1/2 flex flex-col gap-4">

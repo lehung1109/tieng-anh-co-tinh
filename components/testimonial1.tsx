@@ -1,10 +1,11 @@
 interface Testimonial1Props {
+  id?: string;
   className?: string;
 }
 
-const Testimonial1 = ({ className }: Testimonial1Props) => {
+const Testimonial1 = ({ id, className }: Testimonial1Props) => {
   return (
-    <section className={className}>
+    <section id={id} className={className}>
       <div className="container">
         <div className="flex flex-col items-center gap-6 border-y py-14 text-center md:py-20">
           <q className="block max-w-4xl text-2xl font-medium lg:text-3xl">

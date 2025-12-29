@@ -1,20 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
+import Image from "next/image";
 
-const Hero4 = () => {
+interface Hero4Props {
+  id?: string;
+}
+
+const Hero4 = ({ id = "hero" }: Hero4Props) => {
   return (
-    <section className="h-screen pt-12 pb-24 w-full relative overflow-hidden">
-      <picture>
-        <source
-          srcSet="https://placehold.co/1920x1080?text=Image"
-          media="(min-width: 1024px)"
-        />
-        <img
-          src="https://placehold.co/1920x1080?text=Image"
-          alt="Hero"
-          className="absolute inset-0 object-cover w-full h-full"
-        />
-      </picture>
+    <section
+      id={id}
+      className="h-screen pt-12 pb-24 w-full relative overflow-hidden"
+    >
+      <Image
+        src="/images/hero.png"
+        alt="Hero"
+        width={2816}
+        height={1536}
+        className="absolute inset-0 object-cover w-full h-full"
+      />
 
       <div className="absolute inset-0 bg-linear-to-b from-background/0 to-background/80"></div>
 
@@ -22,17 +26,17 @@ const Hero4 = () => {
         <div className="flex justify-between items-end gap-6">
           <div className="flex flex-col gap-8">
             <h1 className="text-6xl font-medium text-foreground md:text-[5.8rem]">
-              heading
+              Từ ngại nói đến tự tin
             </h1>
 
             <p className="text-xl text-foreground md:text-2xl">
-              CableCore Partnership. Worldwide network. Regional manufacturing
+              Học 1 kèm 1 linh hoạt, tập trung vào kỹ năng bạn cần ngay lập tức
             </p>
           </div>
 
           <Button variant="ghost" className="hidden md:flex" asChild>
             <a href="#main" className="hidden md:flex">
-              <span className="text-2xl">Read More</span>
+              <span className="text-2xl">Khám phá ngay</span>
               <ArrowDown size={24} className="size-6" />
             </a>
           </Button>

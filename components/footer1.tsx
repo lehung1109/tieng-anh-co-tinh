@@ -78,7 +78,7 @@ const defaultLegalLinks = [
 const Footer1 = ({
   logo = {
     url: "/",
-    src: "/logo.png",
+    src: "/images/logo.png",
     alt: "logo",
     title: "logo",
     width: 223,

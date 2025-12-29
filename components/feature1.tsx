@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Circle } from "lucide-react";
 
 interface Feature1Props {
+  id?: string;
   className?: string;
   items?: {
     year: string;
@@ -11,6 +12,7 @@ interface Feature1Props {
 }
 
 const Feature1 = ({
+  id,
   className = "",
   items = [
     {
@@ -52,7 +54,7 @@ const Feature1 = ({
   ],
 }: Feature1Props) => {
   return (
-    <section className={className}>
+    <section id={id} className={className}>
       <div className="container">
         <div className="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto text-center mb-12">
           <Badge>Feature 1</Badge>
