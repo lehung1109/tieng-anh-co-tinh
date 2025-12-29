@@ -16,40 +16,40 @@ const Feature1 = ({
   className = "",
   items = [
     {
-      year: "2024",
-      title: "Series B Funding",
+      year: "Khởi đầu",
+      title: "Khởi động & đánh giá trình độ",
       description:
-        "Raised $45M to accelerate global expansion and product development.",
+        "Giáo viên tìm hiểu mục tiêu, đánh giá trình độ hiện tại và các khó khăn khi nói tiếng Anh, từ đó thiết kế lộ trình 1-1 phù hợp với bạn.",
     },
     {
-      year: "2023",
-      title: "Series A Funding",
+      year: "Nền tảng",
+      title: "Củng cố nền tảng giao tiếp",
       description:
-        "Raised $20M to accelerate product development and market expansion.",
+        "Ôn lại và hoàn thiện các cấu trúc, từ vựng cơ bản thường dùng khi giao tiếp, giúp bạn nói được những câu đơn giản, rõ ý và tự nhiên hơn.",
     },
     {
-      year: "2022",
-      title: "Series Seed Funding",
+      year: "Hoàn thiện",
+      title: "Sửa phát âm & ngữ điệu",
       description:
-        "Raised $10M to accelerate product development and market expansion.",
+        "Tập trung sửa phát âm, nhấn trọng âm và ngữ điệu để người nghe dễ hiểu hơn, đồng thời tăng độ tự tin khi mở miệng nói tiếng Anh.",
     },
     {
-      year: "2021",
-      title: "Series Seed Funding",
+      year: "Phản xạ",
+      title: "Luyện phản xạ trong hội thoại",
       description:
-        "Raised $10M to accelerate product development and market expansion.",
+        "Luyện phản xạ qua các đoạn hội thoại 1-1 cùng giáo viên, rèn thói quen trả lời nhanh, không dịch trong đầu và nói trôi chảy hơn.",
     },
     {
-      year: "2020",
-      title: "Series Seed Funding",
+      year: "Thực chiến",
+      title: "Ứng dụng vào tình huống thực tế",
       description:
-        "Raised $10M to accelerate product development and market expansion.",
+        "Thực hành giao tiếp trong các bối cảnh bạn thường gặp: đi làm, họp, phỏng vấn, thuyết trình hoặc du lịch, tùy theo mục tiêu cá nhân.",
     },
     {
-      year: "2019",
-      title: "Series Seed Funding",
+      year: "Duy trì",
+      title: "Duy trì & nâng cấp khả năng nói",
       description:
-        "Raised $10M to accelerate product development and market expansion.",
+        "Tiếp tục luyện nói với chủ đề nâng cao hơn, mở rộng từ vựng, cải thiện cách diễn đạt và duy trì thói quen sử dụng tiếng Anh thường xuyên.",
     },
   ],
 }: Feature1Props) => {
@@ -57,14 +57,16 @@ const Feature1 = ({
     <section id={id} className={className}>
       <div className="container">
         <div className="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto text-center mb-12">
-          <Badge>Feature 1</Badge>
+          <Badge>Lộ trình học</Badge>
 
           <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
-            From idea to industry leader
+            Học có lộ trình, tiến bộ nhanh
           </h2>
 
           <p className="text-muted-foreground">
-            Key moments that shaped who we are today.
+            Lộ trình được thiết kế theo mục tiêu và thời gian của bạn. Mỗi giai
+            đoạn đều có mục tiêu rõ ràng, giúp bạn thấy được tiến bộ sau từng
+            bước.
           </p>
         </div>
         <div className="mx-auto max-w-2xl">
