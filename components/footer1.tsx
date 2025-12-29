@@ -90,7 +90,7 @@ const Footer1 = ({
                 />
               </a>
             </div>
-            <p className="max-w-[70%] text-sm">{description}</p>
+            <p className="lg:max-w-[70%] text-sm">{description}</p>
             <ul className="flex items-center space-x-6">
               {socialLinks.map((social, idx) => (
                 <li key={idx} className="font-medium hover:text-primary">
@@ -101,7 +101,7 @@ const Footer1 = ({
               ))}
             </ul>
           </div>
-          <div className="grid grid-cols-2 w-full gap-6 md:grid-cols-2 lg:gap-20">
+          <div className="grid w-full gap-6 md:grid-cols-2 lg:gap-20">
             {sections.map((section, sectionIdx) => (
               <div key={sectionIdx}>
                 <h3 className="mb-4 font-bold">{section.title}</h3>
