@@ -47,7 +47,7 @@ interface Navbar1Props {
   };
   menu?: MenuItem[];
   auth?: {
-    login: {
+    login?: {
       title: string;
       url: string;
     };
@@ -84,7 +84,6 @@ const Header1 = ({
     },
   ],
   auth = {
-    login: { title: "Đăng nhập", url: "#" },
     signup: { title: "Đăng ký", url: "#contact" },
   },
   className,
@@ -112,9 +111,11 @@ const Header1 = ({
             </NavigationMenu>
           </div>
           <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm">
-              <a href={auth.login.url}>{auth.login.title}</a>
-            </Button>
+            {auth.login && (
+              <Button asChild variant="outline" size="sm">
+                <a href={auth.login.url}>{auth.login.title}</a>
+              </Button>
+            )}
             <Button asChild size="sm">
               <a href={auth.signup.url}>{auth.signup.title}</a>
             </Button>
@@ -164,9 +165,11 @@ const Header1 = ({
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
-                    <Button asChild variant="outline">
-                      <a href={auth.login.url}>{auth.login.title}</a>
-                    </Button>
+                    {auth.login && (
+                      <Button asChild variant="outline">
+                        <a href={auth.login.url}>{auth.login.title}</a>
+                      </Button>
+                    )}
                     <Button asChild>
                       <a href={auth.signup.url}>{auth.signup.title}</a>
                     </Button>

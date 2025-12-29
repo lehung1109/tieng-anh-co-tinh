@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  SiFacebook,
-  SiYoutube,
-  SiTiktok,
-} from "@icons-pack/react-simple-icons";
+import { SiFacebook, SiZalo } from "@icons-pack/react-simple-icons";
 
 import Image from "next/image";
 
@@ -36,43 +32,29 @@ interface Footer1Props {
 
 const defaultSections = [
   {
-    title: "Product",
+    title: "Liên hệ",
     links: [
-      { name: "Overview", href: "#" },
-      { name: "Pricing", href: "#" },
-      { name: "Marketplace", href: "#" },
-      { name: "Features", href: "#" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { name: "About", href: "#" },
-      { name: "Team", href: "#" },
-      { name: "Blog", href: "#" },
-      { name: "Careers", href: "#" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { name: "Help", href: "#" },
-      { name: "Sales", href: "#" },
-      { name: "Advertise", href: "#" },
-      { name: "Privacy", href: "#" },
+      {
+        name: "Email: nguyenthitinh.111996@gmail.com",
+        href: "mailto:nguyenthitinh.111996@gmail.com",
+      },
+      { name: "SĐT: 0337659820", href: "tel:0337659820" },
+      { name: "Hà Nội, Việt Nam", href: "#" },
     ],
   },
 ];
 
 const defaultSocialLinks = [
-  { icon: <SiYoutube className="size-5" />, href: "#", label: "Youtube" },
-  { icon: <SiFacebook className="size-5" />, href: "#", label: "Facebook" },
-  { icon: <SiTiktok className="size-5" />, href: "#", label: "Tiktok" },
-];
-
-const defaultLegalLinks = [
-  { name: "Terms and Conditions", href: "#" },
-  { name: "Privacy Policy", href: "#" },
+  {
+    icon: <SiFacebook className="size-6" />,
+    href: "https://m.me/tinh.nguyen.38887",
+    label: "Facebook",
+  },
+  {
+    icon: <SiZalo className="size-6" />,
+    href: "https://zalo.me/0337659818",
+    label: "Zalo",
+  },
 ];
 
 const Footer1 = ({
@@ -85,10 +67,10 @@ const Footer1 = ({
     height: 69,
   },
   sections = defaultSections,
-  description = "A collection of components for your startup business or side project.",
+  description = "Chúng tôi tin rằng mỗi người đều có thể tự tin giao tiếp tiếng Anh khi được học đúng cách, đúng lộ trình và có người đồng hành tận tâm",
   socialLinks = defaultSocialLinks,
-  copyright = "© 2024 Shadcnblocks.com. All rights reserved.",
-  legalLinks = defaultLegalLinks,
+  copyright = "© 2026 English Master. All rights reserved.",
+  legalLinks = [],
   className,
 }: Footer1Props) => {
   return (
@@ -119,7 +101,7 @@ const Footer1 = ({
               ))}
             </ul>
           </div>
-          <div className="grid grid-cols-2 w-full gap-6 md:grid-cols-3 lg:gap-20">
+          <div className="grid grid-cols-2 w-full gap-6 md:grid-cols-2 lg:gap-20">
             {sections.map((section, sectionIdx) => (
               <div key={sectionIdx}>
                 <h3 className="mb-4 font-bold">{section.title}</h3>
