@@ -13,12 +13,12 @@ const Contact1 = ({ id, className }: Contact1Props) => {
           <div className="flex lg:max-w-1/2 flex-col justify-between gap-10">
             <div className="text-center lg:text-left flex flex-col gap-4">
               <h2 className="mb-2 text-5xl font-semibold lg:mb-1 lg:text-6xl">
-                Contact Us
+                Đừng để ngại nói cản bước bạn
               </h2>
 
               <p className="text-muted-foreground">
-                We are available for questions, feedback, or collaboration
-                opportunities. Let us know how we can help!
+                Liên hệ ngay để được tư vấn miễn phí và nhận ưu đãi đặc biệt cho
+                học viên đăng ký sớm. Số lượng slot học 1-1 có hạn!
               </p>
             </div>
           </div>
