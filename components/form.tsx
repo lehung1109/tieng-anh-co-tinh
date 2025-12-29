@@ -17,10 +17,10 @@ const Form = () => {
     <form action={formAction}>
       <FieldGroup>
         <Field>
-          <FieldLabel htmlFor="name">Full Name</FieldLabel>
+          <FieldLabel htmlFor="name">Họ và tên</FieldLabel>
           <Input
             type="text"
-            placeholder="Full Name"
+            placeholder="Họ và tên"
             id="name"
             required
             name="name"
@@ -28,13 +28,13 @@ const Form = () => {
           />
         </Field>
         <Field>
-          <FieldLabel htmlFor="email">Email</FieldLabel>
+          <FieldLabel htmlFor="phone">Số điện thoại</FieldLabel>
           <Input
-            type="email"
-            placeholder="Email"
-            id="email"
+            type="tel"
+            placeholder="Số điện thoại"
+            id="phone"
             required
-            name="email"
+            name="phone"
             disabled={isPending}
           />
         </Field>
@@ -50,7 +50,7 @@ const Form = () => {
         </Field>
         <Field>
           <Button type="submit" className="w-full" disabled={isPending}>
-            {isPending ? "Submitting..." : "Submit"}
+            {isPending ? "Đang gửi..." : "Gửi"}
           </Button>
         </Field>
       </FieldGroup>
