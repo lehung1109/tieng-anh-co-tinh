@@ -14,17 +14,17 @@ const Cta1 = ({ id, href = "#", className = "" }: Cta1Props) => {
         <div className="flex flex-col items-start justify-between gap-8 rounded-lg bg-muted px-6 py-10 md:flex-row lg:px-20 lg:py-16">
           <div className="md:w-1/2 flex flex-col gap-4">
             <h4 className="mb-1 text-2xl font-bold md:text-3xl">
-              Call to Action
+              Mỗi buổi học, một bước tiến
             </h4>
 
             <p className="text-muted-foreground">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Architecto illo praesentium nisi, accusantium quae.
+              Giáo trình được thiết kế riêng dựa trên mục tiêu và trình độ hiện
+              tại của bạn. Không lãng phí thời gian học những gì bạn không cần.
             </p>
 
             <Button asChild>
               <a href={href} className="self-start">
-                Get Started
+                Đặt lịch học thử ngay
                 <ArrowRight className="size-4" />
               </a>
             </Button>
@@ -33,23 +33,23 @@ const Cta1 = ({ id, href = "#", className = "" }: Cta1Props) => {
             <ul className="flex flex-col gap-2">
               <li className="flex items-center gap-2">
                 <Check className="size-4" />
-                <span>Easy Integration</span>
+                <span>Giáo trình cá nhân hóa 100%</span>
               </li>
               <li className="flex items-center gap-2">
                 <Check className="size-4" />
-                <span>24/7 Support</span>
+                <span>Sửa phát âm, ngữ pháp trực tiếp</span>
               </li>
               <li className="flex items-center gap-2">
                 <Check className="size-4" />
-                <span>Customizable Design</span>
+                <span>Giao tiếp qua tình huống thực tế</span>
               </li>
               <li className="flex items-center gap-2">
                 <Check className="size-4" />
-                <span>Scalable Performance</span>
+                <span>Lịch học linh hoạt, phù hợp bạn</span>
               </li>
               <li className="flex items-center gap-2">
                 <Check className="size-4" />
-                <span>Hundreds of Blocks</span>
+                <span>Theo sát và đo lường tiến bộ</span>
               </li>
             </ul>
           </div>

@@ -84,8 +84,8 @@ const Header1 = ({
     },
   ],
   auth = {
-    login: { title: "Login", url: "#" },
-    signup: { title: "Sign up", url: "#" },
+    login: { title: "Đăng nhập", url: "#" },
+    signup: { title: "Đăng ký", url: "#contact" },
   },
   className,
 }: Navbar1Props) => {
