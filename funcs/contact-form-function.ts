@@ -10,5 +10,5 @@ export const contactFormFunction = async (previousState: string, formData: FormD
     setTimeout(resolve, 2000);
   });
 
-  return "Form submitted successfully";
+  return "Đã gửi thành công";
 };
