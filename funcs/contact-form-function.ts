@@ -63,7 +63,7 @@ export const contactFormFunction = async (
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT,
+      port: Number(process.env.EMAIL_PORT),
       secure: true,
       auth: {
         user: process.env.EMAIL_USER,
@@ -75,7 +75,7 @@ export const contactFormFunction = async (
       from: process.env.EMAIL_USER,
       to: ["nguyenthitinh.111996@gmail.com", "hung0895@gmail.com"],
       subject: "Học viên gửi yêu cầu qua website",
-      text: `Họ và tên: ${name}\nSố điện thoại: ${phone}\Message: ${message}`,
+      text: `Họ và tên: ${name}\nSố điện thoại: ${phone}\nMessage: ${message}`,
     });
 
     return {
