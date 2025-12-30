@@ -97,7 +97,7 @@ const Header1 = ({
           <a href={logo.url} className="flex items-center gap-2">
             <Image
               src={logo.src}
-              className="dark:invert"
+              className="dark:invert w-50 h-auto"
               alt={logo.alt}
               width={logo.width}
               height={logo.height}
@@ -129,7 +129,7 @@ const Header1 = ({
             <a href={logo.url} className="flex items-center gap-2">
               <Image
                 src={logo.src}
-                className="dark:invert"
+                className="dark:invert w-32 h-auto"
                 alt={logo.alt}
                 width={logo.width}
                 height={logo.height}

@@ -9,7 +9,7 @@ import { Testimonial1 } from "@/components/testimonial1";
 export default function Home() {
   return (
     <>
-      <Header1 className="fixed top-0 z-50 w-full left-0 bg-background" />
+      <Header1 className="fixed top-0 z-50 w-full left-0 bg-background shadow-lg dark:shadow-gray-800/50" />
       <Hero4 id="hero" />
       <main id="main" className="scroll-mt-48">
         <Cta1 id="advantage" href="#contact" className="scroll-mt-48" />
