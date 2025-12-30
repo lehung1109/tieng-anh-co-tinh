@@ -87,6 +87,7 @@ const Footer1 = ({
                   title={logo.title}
                   width={logo.width}
                   height={logo.height}
+                  className="w-50 h-auto"
                 />
               </a>
             </div>
