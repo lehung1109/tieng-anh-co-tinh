@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { startTransition, useActionState } from "react";
 import {
   Field,
   FieldError,
@@ -11,7 +11,6 @@ import { contactFormFunction } from "@/funcs/contact-form-function";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import RecaptchaProvider from "@/providers/RecaptchaProvider";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const Form = () => {
@@ -28,79 +27,81 @@ const Form = () => {
       return;
     }
 
+    // Get form data
+    const formData = new FormData(event.currentTarget);
+
     // Generate reCAPTCHA token
     const token = await executeRecaptcha("contact_form");
 
     // Add token to form data
-    const formData = new FormData(event.currentTarget);
     formData.append("captchaToken", token);
 
     // Trigger server action
-    formAction(formData);
+    startTransition(() => {
+      formAction(formData);
+    });
   };
 
   return (
-    <RecaptchaProvider>
-      <form onSubmit={handleSubmit}>
-        <FieldGroup>
-          <Field>
-            <FieldLabel htmlFor="name">Họ và tên</FieldLabel>
-            <Input
-              type="text"
-              placeholder="Họ và tên"
-              id="name"
-              required
-              name="name"
-              disabled={isPending}
-            />
+    <form onSubmit={handleSubmit}>
+      <FieldGroup>
+        <Field>
+          <FieldLabel htmlFor="name">Họ và tên</FieldLabel>
+          <Input
+            type="text"
+            placeholder="Họ và tên"
+            id="name"
+            required
+            name="name"
+            disabled={isPending}
+          />
 
-            {state?.errors?.name && (
-              <FieldError>{state.errors.name[0]}</FieldError>
-            )}
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="phone">Số điện thoại</FieldLabel>
-            <Input
-              type="tel"
-              placeholder="Số điện thoại"
-              id="phone"
-              required
-              name="phone"
-              disabled={isPending}
-            />
+          {state?.errors?.name && !isPending && (
+            <FieldError>{state.errors.name[0]}</FieldError>
+          )}
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="phone">Số điện thoại</FieldLabel>
+          <Input
+            type="tel"
+            placeholder="Số điện thoại"
+            id="phone"
+            required
+            name="phone"
+            disabled={isPending}
+          />
 
-            {state?.errors?.phone && (
-              <FieldError>{state.errors.phone[0]}</FieldError>
-            )}
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="message">Message</FieldLabel>
-            <Textarea
-              placeholder="Message"
-              id="message"
-              required
-              name="message"
-              disabled={isPending}
-            />
-          </Field>
-          <Field>
-            <Button type="submit" className="w-full" disabled={isPending}>
-              {isPending ? "Đang gửi..." : "Gửi"}
-            </Button>
-          </Field>
-        </FieldGroup>
+          {state?.errors?.phone && !isPending && (
+            <FieldError>{state.errors.phone[0]}</FieldError>
+          )}
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="message">Message</FieldLabel>
+          <Textarea
+            placeholder="Message"
+            id="message"
+            required
+            name="message"
+            disabled={isPending}
+          />
+        </Field>
+        <Field>
+          <Button type="submit" className="w-full" disabled={isPending}>
+            {isPending ? "Đang gửi..." : "Gửi"}
+          </Button>
+        </Field>
+      </FieldGroup>
 
-        {state?.message && !isPending && (
-          <p
-            className={`mt-2 ${
-              state.success ? "text-green-500" : "text-red-500"
-            }`}
-          >
-            {state.message}
-          </p>
-        )}
-      </form>
-    </RecaptchaProvider>
+      {state?.message && !isPending && (
+        <p
+          className={`mt-2 ${
+            state.success ? "text-green-500" : "text-red-500"
+          }`}
+        >
+          {state.message}
+        </p>
+      )}
+    </form>
   );
 };
 

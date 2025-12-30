@@ -10,7 +10,7 @@ export const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   phone: z
     .string()
-    .regex(vietnamesePhoneRegex, "Invalid Vietnamese phone number")
+    .regex(vietnamesePhoneRegex, "Số điện thoại không hợp lệ")
     .transform((val) => {
       // Normalize to E.164 format (+84xxxxxxxxx)
       if (val.startsWith("0")) {
