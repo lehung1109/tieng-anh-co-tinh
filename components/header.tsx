@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -170,9 +171,12 @@ const Header1 = ({
                         <a href={auth.login.url}>{auth.login.title}</a>
                       </Button>
                     )}
-                    <Button asChild>
-                      <a href={auth.signup.url}>{auth.signup.title}</a>
-                    </Button>
+
+                    <SheetClose asChild>
+                      <Button asChild>
+                        <a href={auth.signup.url}>{auth.signup.title}</a>
+                      </Button>
+                    </SheetClose>
                   </div>
                 </div>
               </SheetContent>
@@ -231,9 +235,11 @@ const renderMobileMenuItem = (item: MenuItem) => {
   }
 
   return (
-    <a key={item.title} href={item.url} className="text-md font-semibold">
-      {item.title}
-    </a>
+    <SheetClose asChild>
+      <a key={item.title} href={item.url} className="text-md font-semibold">
+        {item.title}
+      </a>
+    </SheetClose>
   );
 };
 

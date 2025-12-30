@@ -11,11 +11,15 @@ export default function Home() {
     <>
       <Header1 className="fixed top-0 z-50 w-full left-0 bg-background shadow-lg dark:shadow-gray-800/50" />
       <Hero4 id="hero" />
-      <main id="main" className="scroll-mt-48">
-        <Cta1 id="advantage" href="#contact" className="scroll-mt-48" />
-        <Feature1 id="roadmap" className="scroll-mt-48" />
-        <Testimonial1 id="feedback" className="scroll-mt-48" />
-        <Contact1 id="contact" className="scroll-mt-48" />
+      <main id="main" className="scroll-mt-36 lg:scroll-mt-48">
+        <Cta1
+          id="advantage"
+          href="#contact"
+          className="scroll-mt-36 lg:scroll-mt-48"
+        />
+        <Feature1 id="roadmap" className="scroll-mt-36 lg:scroll-mt-48" />
+        <Testimonial1 id="feedback" className="scroll-mt-36 lg:scroll-mt-48" />
+        <Contact1 id="contact" className="scroll-mt-36 lg:scroll-mt-48" />
       </main>
       <Footer1 />
     </>
