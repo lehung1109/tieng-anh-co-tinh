@@ -1,10 +1,16 @@
 "use server";
 
+import {
+  ContactFormData,
+  contactFormSchema,
+} from "@/lib/validations/contact-form";
 import nodemailer from "nodemailer";
+import { flattenError } from "zod";
 
 interface ContactFormFunctionState {
   message: string;
   success?: boolean;
+  errors?: ReturnType<typeof flattenError<ContactFormData>>["fieldErrors"];
 }
 
 export const contactFormFunction = async (
@@ -16,7 +22,7 @@ export const contactFormFunction = async (
 
   if (!captchaToken) {
     return {
-      message: "reCAPTCHA token not found",
+      message: "Không tìm thấy token reCAPTCHA. Vui lòng thử lại.",
       success: false,
     };
   }
@@ -26,7 +32,7 @@ export const contactFormFunction = async (
 
   if (!captchaData.success || captchaData.score < 0.5) {
     return {
-      message: "reCAPTCHA verification failed. Please try again.",
+      message: "Xác thực reCAPTCHA thất bại. Vui lòng thử lại.",
       success: false,
     };
   }
@@ -35,6 +41,23 @@ export const contactFormFunction = async (
   const name = formData.get("name") as string;
   const phone = formData.get("phone") as string;
   const message = formData.get("message") as string;
+
+  // validation form data
+  const validationResult = contactFormSchema.safeParse({
+    name,
+    phone,
+    message,
+  });
+
+  if (!validationResult.success) {
+    const errors = flattenError(validationResult.error).fieldErrors;
+
+    return {
+      message: "Có lỗi khi gửi yêu cầu. Vui lòng kiểm tra lại thông tin.",
+      success: false,
+      errors,
+    };
+  }
 
   // Send email with nodemailer
   try {
@@ -54,13 +77,13 @@ export const contactFormFunction = async (
     });
 
     return {
-      message: "Email sent successfully!",
+      message: "Gửi yêu cầu thành công!",
       success: true,
     };
   } catch (error) {
     console.error("Error sending email:", error);
     return {
-      message: "Failed to send email",
+      message: "Có lỗi khi gửi yêu cầu. Vui lòng thử lại sau.",
       success: false,
     };
   }

@@ -1,7 +1,12 @@
 "use client";
 
 import { useActionState } from "react";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
 import { contactFormFunction } from "@/funcs/contact-form-function";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -48,6 +53,10 @@ const Form = () => {
               name="name"
               disabled={isPending}
             />
+
+            {state?.errors?.name && (
+              <FieldError>{state.errors.name[0]}</FieldError>
+            )}
           </Field>
           <Field>
             <FieldLabel htmlFor="phone">Số điện thoại</FieldLabel>
@@ -59,6 +68,10 @@ const Form = () => {
               name="phone"
               disabled={isPending}
             />
+
+            {state?.errors?.phone && (
+              <FieldError>{state.errors.phone[0]}</FieldError>
+            )}
           </Field>
           <Field>
             <FieldLabel htmlFor="message">Message</FieldLabel>
