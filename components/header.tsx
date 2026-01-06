@@ -235,8 +235,8 @@ const renderMobileMenuItem = (item: MenuItem) => {
   }
 
   return (
-    <SheetClose asChild>
-      <a key={item.title} href={item.url} className="text-md font-semibold">
+    <SheetClose key={item.title} asChild>
+      <a href={item.url} className="text-md font-semibold">
         {item.title}
       </a>
     </SheetClose>
