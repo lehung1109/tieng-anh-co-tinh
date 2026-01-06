@@ -2,22 +2,22 @@
 
 import { verifyRecaptcha } from "@/lib/utils";
 import {
-  ContactFormData,
-  contactFormSchema,
-} from "@/lib/validations/contact-form";
+  RegisterFormData,
+  registerFormSchema,
+} from "@/lib/validations/register-form";
 import nodemailer from "nodemailer";
 import { flattenError } from "zod";
 
-interface ContactFormFunctionState {
+interface RegisterFormFunctionState {
   message: string;
   success?: boolean;
-  errors?: ReturnType<typeof flattenError<ContactFormData>>["fieldErrors"];
+  errors?: ReturnType<typeof flattenError<RegisterFormData>>["fieldErrors"];
 }
 
-export const contactFormFunction = async (
-  previousState: ContactFormFunctionState,
+export const registerFormFunction = async (
+  previousState: RegisterFormFunctionState,
   formData: FormData
-): Promise<ContactFormFunctionState> => {
+): Promise<RegisterFormFunctionState> => {
   // Get reCAPTCHA token
   const captchaToken = formData.get("captchaToken") as string;
 
@@ -40,14 +40,16 @@ export const contactFormFunction = async (
 
   // Get form data
   const name = formData.get("name") as string;
-  const phone = formData.get("phone") as string;
-  const message = formData.get("message") as string;
+  const email = formData.get("email") as string;
+  const pass = formData.get("pass") as string;
+  const confirmPass = formData.get("confirm-pass") as string;
 
   // validation form data
-  const validationResult = contactFormSchema.safeParse({
+  const validationResult = registerFormSchema.safeParse({
     name,
-    phone,
-    message,
+    email,
+    pass,
+    confirmPass,
   });
 
   if (!validationResult.success) {
@@ -75,18 +77,18 @@ export const contactFormFunction = async (
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_TO,
-      subject: "Học viên gửi yêu cầu qua website",
-      text: `Họ và tên: ${name}\nSố điện thoại: ${phone}\nMessage: ${message}`,
+      subject: "Học viên đăng ký qua website",
+      text: `Họ và tên: ${name}\nEmail: ${email}\nPassword: ${pass}`,
     });
 
     return {
-      message: "Gửi yêu cầu thành công!",
+      message: "Đăng ký thành công!",
       success: true,
     };
   } catch (error) {
     console.error("Error sending email:", error);
     return {
-      message: "Có lỗi khi gửi yêu cầu. Vui lòng thử lại sau.",
+      message: "Có lỗi khi đăng ký. Vui lòng thử lại sau.",
       success: false,
     };
   }

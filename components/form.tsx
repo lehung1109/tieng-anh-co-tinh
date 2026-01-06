@@ -1,6 +1,6 @@
 "use client";
 
-import { startTransition, useActionState } from "react";
+import { startTransition, useActionState, useEffect, useRef } from "react";
 import {
   Field,
   FieldError,
@@ -18,6 +18,13 @@ const Form = () => {
     message: "",
   });
   const { executeRecaptcha } = useGoogleReCaptcha();
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (formRef.current && state?.success) {
+      formRef.current.reset();
+    }
+  }, [state]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,7 +50,7 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} ref={formRef}>
       <FieldGroup>
         <Field>
           <FieldLabel htmlFor="name">Họ và tên</FieldLabel>

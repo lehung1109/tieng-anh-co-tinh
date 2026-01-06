@@ -1,13 +1,51 @@
 import { Input } from "./ui/input";
 import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
 import { Button } from "./ui/button";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { startTransition, useActionState, useEffect, useRef } from "react";
+import { registerFormFunction } from "@/funcs/register-form-function";
 
 const Register = () => {
+  const [state, formAction, isPending] = useActionState(registerFormFunction, {
+    message: "",
+  });
+  const { executeRecaptcha } = useGoogleReCaptcha();
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (formRef.current && state?.success) {
+      formRef.current.reset();
+    }
+  }, [state]);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!executeRecaptcha) {
+      alert("reCAPTCHA not ready");
+      return;
+    }
+
+    // Get form data
+    const formData = new FormData(event.currentTarget);
+
+    // Generate reCAPTCHA token
+    const token = await executeRecaptcha("contact_form");
+
+    // Add token to form data
+    formData.append("captchaToken", token);
+
+    // Trigger server action
+    startTransition(() => {
+      formAction(formData);
+    });
+  };
+
   return (
     <div className="container max-w-xl">
       <h1 className="text-2xl font-bold mb-10">Đăng ký</h1>
 
-      <form action="">
+      <form onSubmit={handleSubmit} ref={formRef}>
         <FieldGroup>
           <Field>
             <FieldLabel htmlFor="name">Họ và tên</FieldLabel>
@@ -34,8 +72,8 @@ const Register = () => {
           </Field>
 
           <Field>
-            <Button type="submit" className="w-full">
-              Đăng ký
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? "Đang đăng ký..." : "Đăng ký"}
             </Button>
           </Field>
         </FieldGroup>
