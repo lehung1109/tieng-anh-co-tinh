@@ -1,9 +1,18 @@
+"use client";
+
 import { Input } from "./ui/input";
-import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "./ui/field";
 import { Button } from "./ui/button";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { startTransition, useActionState, useEffect, useRef } from "react";
 import { registerFormFunction } from "@/funcs/register-form-function";
+import { Spinner } from "./ui/spinner";
 
 const Register = () => {
   const [state, formAction, isPending] = useActionState(registerFormFunction, {
@@ -45,35 +54,57 @@ const Register = () => {
     <div className="container max-w-xl">
       <h1 className="text-2xl font-bold mb-10">Đăng ký</h1>
 
-      <form onSubmit={handleSubmit} ref={formRef}>
+      <form onSubmit={handleSubmit} ref={formRef} className="relative p-5">
+        {/* loading animation */}
+        {isPending && (
+          <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-white/50 backdrop-blur-sm ">
+            <Spinner className="size-8" />
+          </div>
+        )}
+
         <FieldGroup>
           <Field>
             <FieldLabel htmlFor="name">Họ và tên</FieldLabel>
             <Input type="text" name="name" id="name" />
-            <FieldError>Họ và tên không được để trống</FieldError>
+
+            {state?.errors?.name && !isPending && (
+              <FieldError>{state.errors.name[0]}</FieldError>
+            )}
           </Field>
 
           <Field>
             <FieldLabel htmlFor="email">Email</FieldLabel>
             <Input type="email" name="email" id="email" />
-            <FieldError>Email không được để trống</FieldError>
+
+            {state?.errors?.email && !isPending && (
+              <FieldError>{state.errors.email[0]}</FieldError>
+            )}
           </Field>
 
           <Field>
             <FieldLabel htmlFor="pass">Password</FieldLabel>
             <Input type="password" name="pass" id="pass" />
-            <FieldError>Password không được để trống</FieldError>
+            <FieldDescription>
+              Password must be at least 8 characters
+            </FieldDescription>
+
+            {state?.errors?.pass && !isPending && (
+              <FieldError>{state.errors.pass[0]}</FieldError>
+            )}
           </Field>
 
           <Field>
             <FieldLabel htmlFor="confirm-pass">Confirm Password</FieldLabel>
             <Input type="password" name="confirm-pass" id="confirm-pass" />
-            <FieldError>Confirm Password không được để trống</FieldError>
+
+            {state?.errors?.confirmPass && !isPending && (
+              <FieldError>{state.errors.confirmPass[0]}</FieldError>
+            )}
           </Field>
 
           <Field>
-            <Button type="submit" className="w-full" disabled={isPending}>
-              {isPending ? "Đang đăng ký..." : "Đăng ký"}
+            <Button type="submit" className="w-full">
+              Đăng ký
             </Button>
           </Field>
         </FieldGroup>
