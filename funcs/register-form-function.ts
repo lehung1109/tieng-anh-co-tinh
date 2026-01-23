@@ -5,6 +5,7 @@ import {
   RegisterFormData,
   registerFormSchema,
 } from "@/lib/validations/register-form";
+import { signUpNewUser } from "@/services/sign-up-new-user";
 import nodemailer from "nodemailer";
 import { flattenError } from "zod";
 
@@ -74,6 +75,16 @@ export const registerFormFunction = async (
       },
     });
 
+    const { data, error } = await signUpNewUser(email, pass);
+
+    if (error) {
+      return {
+        message: "Có lỗi khi đăng ký. Vui lòng thử lại sau.",
+        success: false,
+      };
+    }
+
+    // send email to admin
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_TO,

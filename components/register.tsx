@@ -107,6 +107,18 @@ const Register = () => {
               Đăng ký
             </Button>
           </Field>
+
+          <Field>
+            {/* show message when success */}
+            {state?.message && !isPending && state.success === true && (
+              <FieldDescription className="text-green-500">{state.message}</FieldDescription>
+            )}
+
+            {/* show message when error */}
+            {state?.message && !isPending && state.success === false && (
+              <FieldDescription className="text-red-500">{state.message}</FieldDescription>
+            )}
+          </Field>
         </FieldGroup>
       </form>
     </div>
