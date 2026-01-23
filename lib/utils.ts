@@ -14,3 +14,28 @@ export const verifyRecaptcha = async (token: string) => {
 
   return data;
 };
+
+export const isPublicRoute = (pathname: string): boolean => {
+  const publicRoutes = [
+    '/',
+    '/login',
+    '/signup',
+    '/about',
+    '/contact',
+    '/pricing',
+  ]
+  
+  // Check exact match
+  if (publicRoutes.includes(pathname)) {
+    return true
+  }
+  
+  // Check wildcard patterns (optional)
+  const publicPatterns = [
+    '/blog',      // Matches /blog/*
+    '/docs',      // Matches /docs/*
+    '/public',    // Matches /public/*
+  ]
+  
+  return publicPatterns.some(pattern => pathname.startsWith(pattern))
+}
