@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
 import "./globals.css";
+import { languages } from "@/lib/i18n/settings";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +13,10 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export async function generateStaticParams() {
+  return languages.map((lng) => ({ lng }))
+}
 
 export const metadata: Metadata = {
   title: "Tự tin nói tiếng Anh - Học 1-1 cùng giáo viên",
