@@ -3,7 +3,9 @@ import { Header1 } from "@/components/header";
 import { getT } from "@/lib/i18n/server";
 
 export async function generateMetadata() {
-  const { t } = await getT();
+  const { t, i18n } = await getT();
+
+  console.log(i18n.resolvedLanguage);
 
   return {
     title: t('home.title'),

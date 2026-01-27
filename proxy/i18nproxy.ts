@@ -52,6 +52,11 @@ export function i18nProxy(proxy: ChainableProxy): ChainableProxy {
       if (lngInReferer) nextResponse.cookies.set(cookieName, lngInReferer);
     }
 
+    // set all headers from headers variable to nextResponse
+    headers.forEach((value, key) => {
+      nextResponse.headers.set(key, value);
+    });
+
     return nextResponse;
   };
 }
