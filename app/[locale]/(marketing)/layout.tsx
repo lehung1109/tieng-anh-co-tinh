@@ -1,5 +1,14 @@
 import { Footer1 } from "@/components/footer1";
 import { Header1 } from "@/components/header";
+import { getT } from "@/lib/i18n/server";
+
+export async function generateMetadata() {
+  const { t } = await getT();
+
+  return {
+    title: t('home.title'),
+  }
+}
 
 export default function MarketingLayout({
   children,

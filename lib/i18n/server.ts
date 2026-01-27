@@ -1,8 +1,8 @@
 import i18next from 'i18next'
-import { fallbackLng, headerName } from './settings'
+import { defaultNS, fallbackLng, headerName } from './settings'
 import { headers } from 'next/headers'
 
-export async function getT(ns: string, keyPrefix?: string) {
+export async function getT(ns?: string, keyPrefix?: string) {
   const headerList = await headers()
   const lng = headerList.get(headerName)
 
@@ -17,7 +17,7 @@ export async function getT(ns: string, keyPrefix?: string) {
   return {
     t: i18next.getFixedT(
       lng ?? i18next.resolvedLanguage ?? fallbackLng,
-      ns,
+      ns ?? defaultNS,
       keyPrefix
     ),
     i18n: i18next
