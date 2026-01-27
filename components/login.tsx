@@ -47,7 +47,7 @@ const Login = () => {
 
   return (
     <div className="container max-w-xl">
-      <h1 className="text-2xl font-bold mb-10">{t("login.title")}</h1>
+      <h1 className="text-2xl font-bold mb-10 text-center">{t("login.title")}</h1>
 
       <form onSubmit={handleSubmit} className="relative p-5">
         {/* loading animation */}

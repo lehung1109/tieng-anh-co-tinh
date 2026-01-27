@@ -5,8 +5,6 @@ import { getT } from "@/lib/i18n/server";
 export async function generateMetadata() {
   const { t, i18n } = await getT();
 
-  console.log(i18n.resolvedLanguage);
-
   return {
     title: t('home.title'),
   }

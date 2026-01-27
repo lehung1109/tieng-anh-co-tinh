@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useTranslation, UseTranslationOptions } from 'react-i18next'
 import { defaultNS } from './settings'
+import i18nextPromise from './i18next'
 
 export function useT(ns?: string, options?: UseTranslationOptions<string>) {
   const locale = useParams()?.locale;
@@ -13,9 +14,15 @@ export function useT(ns?: string, options?: UseTranslationOptions<string>) {
     throw new Error('useT is only available inside /app/[lng]')
 
   useEffect(() => {
-    if (locale && locale !== i18next.resolvedLanguage) {
-      i18next.changeLanguage(locale)
+    const init = async () => {
+      await i18nextPromise;
+
+      if (locale && locale !== i18next.resolvedLanguage) {
+        i18next.changeLanguage(locale)
+      }
     }
+
+    init();
 
   }, [locale])
 
