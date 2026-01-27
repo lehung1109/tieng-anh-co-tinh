@@ -6,7 +6,7 @@ import { fallbackLng, languages, defaultNS } from './settings'
 
 const runsOnServerSide = typeof globalThis.window === 'undefined'
 
-i18next
+const i18nextPromise = i18next
   .use(initReactI18next)
   .use(LanguageDetector)
   .use(
@@ -26,3 +26,5 @@ i18next
     },
     preload: runsOnServerSide ? languages : []
   })
+
+export default i18nextPromise;
