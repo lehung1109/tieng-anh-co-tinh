@@ -4,8 +4,9 @@ import i18next from 'i18next'
 import { useParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useTranslation, UseTranslationOptions } from 'react-i18next'
+import { defaultNS } from './settings'
 
-export function useT(ns: string, options?: UseTranslationOptions<string>) {
+export function useT(ns?: string, options?: UseTranslationOptions<string>) {
   const locale = useParams()?.locale;
 
   if (typeof locale !== 'string')
@@ -18,5 +19,5 @@ export function useT(ns: string, options?: UseTranslationOptions<string>) {
 
   }, [locale])
 
-  return useTranslation(ns, options)
+  return useTranslation(ns ?? defaultNS, options)
 }

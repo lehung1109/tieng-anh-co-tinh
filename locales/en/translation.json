@@ -1,5 +1,19 @@
 {
   "home": {
     "title": "Home"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "passwordDescription": "Password must be at least 8 characters",
+    "submitButton": "Login"
+  },
+  "common": {
+    "recaptchaNotFound": "reCAPTCHA not found. Please try again.",
+    "recaptchaFailed": "reCAPTCHA failed. Please try again.",
+    "formValidationFailed": "Form validation failed. Please check your inputs.",
+    "loginFailed": "Login failed. Please try again.",
+    "loginSuccess": "Login successful."
   }
 }

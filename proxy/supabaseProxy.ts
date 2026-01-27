@@ -41,13 +41,11 @@ export function withSupabaseProxy(proxy: ChainableProxy): ChainableProxy {
     const user = data?.claims
 
     if (
-      !user &&
-      !request.nextUrl.pathname.startsWith('/login') &&
-      !request.nextUrl.pathname.startsWith('/auth')
+      !user
     ) {
       // no user, potentially respond by redirecting the user to the login page
       const url = request.nextUrl.clone()
-      url.pathname = '/login';
+      url.pathname = '/signin';
 
       return NextResponse.redirect(url);
     }
