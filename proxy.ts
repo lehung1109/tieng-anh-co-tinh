@@ -1,16 +1,11 @@
-import { NextResponse, type NextRequest } from "next/server"
-import { updateSession } from "@/lib/supabase/proxy"
-import { isPublicRoute } from "./lib/utils";
+import { withSupabaseProxy } from "./proxy/supabaseProxy";
+import { chainProxy } from "./lib/chainProxy";
+import { i18nProxy } from "./proxy/i18nproxy";
 
-export async function proxy(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
-
-  if (isPublicRoute(pathname)) {
-    return NextResponse.next();
-  }
-
-  return await updateSession(request)
-}
+export default chainProxy([
+  withSupabaseProxy,
+  i18nProxy,
+]);
 
 export const config = {
   matcher: [
@@ -21,6 +16,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * Feel free to modify this pattern to include more paths.
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    String.raw`/((?!_next/static|_next/image|favicon.ico|.*\.(?:svg|png|jpg|jpeg|gif|webp)$).*)`,
   ],
 }
