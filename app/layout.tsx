@@ -4,6 +4,8 @@ import "./globals.css";
 import { languages } from "@/lib/i18n/settings";
 import Script from "next/script";
 import { QueryClientProviderWrapper } from "@/providers/query-client-provider";
+import { generateNonce } from "@/lib/utils";
+import OneTap from "@/components/onetap";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,18 +32,20 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [nonce, hashedNonce] = await generateNonce();
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryClientProviderWrapper>{children}</QueryClientProviderWrapper>
-        <Script src="https://accounts.google.com/gsi/client"></Script>
+        <OneTap nonce={nonce} hashedNonce={hashedNonce} />
       </body>
     </html>
   );

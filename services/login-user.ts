@@ -10,3 +10,14 @@ export async function loginUser(email: string, password: string) {
 
   return { data, error };
 }
+
+export async function signInWithGoogle(nonce: string, response: google.accounts.id.CredentialResponse) {
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signInWithIdToken({
+    provider: "google",
+    token: response.credential,
+    nonce: nonce,
+  });
+
+  return { error };
+}

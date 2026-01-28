@@ -1,13 +1,12 @@
 "use server";
 
 import { getT } from "@/lib/i18n/server";
-import { createClient } from "@/lib/supabase/server";
 import { verifyRecaptcha } from "@/lib/utils";
 import {
   LoginFormData,
   loginFormSchema,
 } from "@/lib/validations/login-form";
-import { loginUser } from "@/services/login-user";
+import { loginUser, signInWithGoogle } from "@/services/login-user";
 import { flattenError } from "zod";
 
 interface RegisterFormFunctionState {
@@ -78,16 +77,9 @@ export const loginFormFunction = async (
   };
 };
 
-export const signInWithGoogle = async (
+export const signInWithGoogleAction = async (
   nonce: string,
   response: google.accounts.id.CredentialResponse,
 ) => {
-  const supabase = await createClient();
-  const { error } = await supabase.auth.signInWithIdToken({
-    provider: "google",
-    token: response.credential,
-    nonce: nonce,
-  });
-
-  return { error };
+  return await signInWithGoogle(nonce, response)
 }

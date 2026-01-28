@@ -13,7 +13,7 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { startTransition, useActionState, useEffect, useState } from "react";
 import {
   loginFormFunction,
-  signInWithGoogle,
+  signInWithGoogleAction,
 } from "@/funcs/login-form-function";
 import { Spinner } from "./ui/spinner";
 import { useT } from "@/lib/i18n/client";
@@ -58,7 +58,7 @@ const Login = ({ nonce, hashedNonce }: LoginModel) => {
     window.handleSignInWithGoogle = (
       response: google.accounts.id.CredentialResponse,
     ) => {
-      signInWithGoogle(nonce, response)
+      signInWithGoogleAction(nonce, response)
         .then(({ error }) => {
           setGoogleError(error?.message ?? null);
         })
