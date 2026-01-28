@@ -1,6 +1,6 @@
 import { Login } from "@/components/login";
 import { generateNonce } from "@/lib/utils";
-import RecaptchaProvider from "@/providers/RecaptchaProvider";
+import RecaptchaProvider from "@/providers/recaptcha-provider";
 
 export default async function LoginPage() {
   const [nonce, hashedNonce] = await generateNonce();

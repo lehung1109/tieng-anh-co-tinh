@@ -1,5 +1,5 @@
 import { Register } from "@/components/register";
-import RecaptchaProvider from "@/providers/RecaptchaProvider";
+import RecaptchaProvider from "@/providers/recaptcha-provider";
 
 export default function RegisterPage() {
   return (
