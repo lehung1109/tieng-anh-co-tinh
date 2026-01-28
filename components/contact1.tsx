@@ -1,4 +1,4 @@
-import { Form } from "@/components/form";
+import { Form } from "@/components/contact-form";
 import RecaptchaProvider from "@/providers/recaptcha-provider";
 
 interface Contact1Props {

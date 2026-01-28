@@ -1,4 +1,4 @@
-import { Register } from "@/components/register";
+import { Register } from "@/components/register-form";
 import RecaptchaProvider from "@/providers/recaptcha-provider";
 
 export default function RegisterPage() {

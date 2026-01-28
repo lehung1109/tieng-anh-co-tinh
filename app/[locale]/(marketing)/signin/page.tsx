@@ -1,4 +1,4 @@
-import { Login } from "@/components/login";
+import { Login } from "@/components/login-form";
 import { generateNonce } from "@/lib/utils";
 import RecaptchaProvider from "@/providers/recaptcha-provider";
 
