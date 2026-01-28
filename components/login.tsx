@@ -14,9 +14,26 @@ import { startTransition, useActionState, useEffect } from "react";
 import { loginFormFunction } from "@/funcs/login-form-function";
 import { Spinner } from "./ui/spinner";
 import { useT } from "@/lib/i18n/client";
-import { handleSignInWithGoogle } from "@/services/login-user";
+import { createClient } from "@/lib/supabase/client";
 
-const Login = () => {
+interface LoginModel {
+  nonce: string;
+  hashedNonce: string;
+}
+
+async function handleSignInWithGoogle(
+  nonce: string,
+  response: google.accounts.id.CredentialResponse,
+) {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithIdToken({
+    provider: "google",
+    token: response.credential,
+    nonce: nonce,
+  });
+}
+
+const Login = ({ nonce, hashedNonce }: LoginModel) => {
   const [state, formAction, isPending] = useActionState(loginFormFunction, {
     message: "",
   });
@@ -47,8 +64,8 @@ const Login = () => {
   };
 
   useEffect(() => {
-    window.handleSignInWithGoogle = handleSignInWithGoogle;
-  }, []);
+    window.handleSignInWithGoogle = handleSignInWithGoogle.bind(null, nonce);
+  }, [nonce]);
 
   return (
     <div className="container max-w-xl">
@@ -104,6 +121,17 @@ const Login = () => {
 
         <FieldGroup>
           <Field>
+            <div
+              id="g_id_onload"
+              data-client_id="749559163816-fnl78jvo7jvlgicdoqki4se514h1h2aa.apps.googleusercontent.com"
+              data-context="signin"
+              data-ux_mode="popup"
+              data-callback="handleSignInWithGoogle"
+              data-nonce={hashedNonce}
+              data-auto_select="true"
+              data-itp_support="true"
+            ></div>
+
             <div
               className="g_id_signin"
               data-type="standard"

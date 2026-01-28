@@ -1,5 +1,3 @@
-declare global {
-  interface Window {
-    handleSignInWithGoogle: () => void;
-  }
+interface Window {
+  handleSignInWithGoogle: (nonce: string, response: google.accounts.id.CredentialResponse) => Promise<void>;
 }
