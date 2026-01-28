@@ -12,7 +12,7 @@ interface OneTapModel {
 
 const OneTap = ({ nonce, hashedNonce }: OneTapModel) => {
   const [loadScript, setLoadScript] = useState<boolean>(false);
-  const { state, dispatch } = useGoogleContext();
+  const { dispatch } = useGoogleContext();
 
   useEffect(() => {
     setTimeout(() => {
@@ -51,8 +51,6 @@ const OneTap = ({ nonce, hashedNonce }: OneTapModel) => {
       ></div>
 
       {loadScript && <Script src="https://accounts.google.com/gsi/client" />}
-
-      {state.error && <div className="text-red-500">{state.error}</div>}
     </div>
   );
 };

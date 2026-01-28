@@ -14,6 +14,7 @@ import { startTransition, useActionState, useState } from "react";
 import { loginFormFunction } from "@/funcs/login-form-function";
 import { Spinner } from "./ui/spinner";
 import { useT } from "@/lib/i18n/client";
+import { useGoogleContext } from "@/hooks/use-google-context";
 
 const Login = () => {
   const [state, formAction, isPending] = useActionState(loginFormFunction, {
@@ -21,7 +22,8 @@ const Login = () => {
   });
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { t } = useT();
-  const [googleError, setGoogleError] = useState<string | null>(null);
+  const { state: googleState } = useGoogleContext();
+  const googleError = googleState.error;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
