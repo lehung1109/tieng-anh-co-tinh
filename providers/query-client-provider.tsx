@@ -1,9 +1,11 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 
-export function Providers({ children }: Readonly<{ children: React.ReactNode }>) {
+export function QueryClientProviderWrapper({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   // Create QueryClient inside the Client Component using useState
   // This ensures it's only created once per component instance
   const [queryClient] = useState(
@@ -16,12 +18,10 @@ export function Providers({ children }: Readonly<{ children: React.ReactNode }>)
             staleTime: 60 * 1000,
           },
         },
-      })
+      }),
   );
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 }

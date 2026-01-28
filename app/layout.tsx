@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Providers } from "@/components/providers";
 import "./globals.css";
 import { languages } from "@/lib/i18n/settings";
 import Script from "next/script";
+import { QueryClientProviderWrapper } from "@/providers/query-client-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +40,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <QueryClientProviderWrapper>{children}</QueryClientProviderWrapper>
         <Script src="https://accounts.google.com/gsi/client"></Script>
       </body>
     </html>
