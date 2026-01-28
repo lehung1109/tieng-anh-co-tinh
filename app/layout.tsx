@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { languages } from "@/lib/i18n/settings";
-import Script from "next/script";
-import { QueryClientProviderWrapper } from "@/providers/query-client-provider";
 import { generateNonce } from "@/lib/utils";
 import OneTap from "@/components/onetap";
+import { SupabaseProvider } from "@/providers/supabase-provider";
+import { Suspense } from "react";
+import RecaptchaProvider from "@/providers/recaptcha-provider";
+import { GoogleProvider } from "@/providers/google-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,8 +46,17 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryClientProviderWrapper>{children}</QueryClientProviderWrapper>
-        <OneTap nonce={nonce} hashedNonce={hashedNonce} />
+        <RecaptchaProvider>
+          <GoogleProvider>
+            <SupabaseProvider>
+              {children}
+
+              <Suspense fallback={<div>Loading...</div>}>
+                <OneTap nonce={nonce} hashedNonce={hashedNonce} />
+              </Suspense>
+            </SupabaseProvider>
+          </GoogleProvider>
+        </RecaptchaProvider>
       </body>
     </html>
   );

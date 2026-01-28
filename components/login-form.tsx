@@ -10,20 +10,12 @@ import {
 } from "./ui/field";
 import { Button } from "./ui/button";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { startTransition, useActionState, useEffect, useState } from "react";
-import {
-  loginFormFunction,
-  signInWithGoogleAction,
-} from "@/funcs/login-form-function";
+import { startTransition, useActionState, useState } from "react";
+import { loginFormFunction } from "@/funcs/login-form-function";
 import { Spinner } from "./ui/spinner";
 import { useT } from "@/lib/i18n/client";
 
-interface LoginModel {
-  nonce: string;
-  hashedNonce: string;
-}
-
-const Login = ({ nonce, hashedNonce }: LoginModel) => {
+const Login = () => {
   const [state, formAction, isPending] = useActionState(loginFormFunction, {
     message: "",
   });
@@ -53,20 +45,6 @@ const Login = ({ nonce, hashedNonce }: LoginModel) => {
       formAction(formData);
     });
   };
-
-  useEffect(() => {
-    window.handleSignInWithGoogle = (
-      response: google.accounts.id.CredentialResponse,
-    ) => {
-      signInWithGoogleAction(nonce, response)
-        .then(({ error }) => {
-          setGoogleError(error?.message ?? null);
-        })
-        .catch(() => {
-          setGoogleError("An error occurred while signing in with Google");
-        });
-    };
-  }, [nonce]);
 
   return (
     <div className="container max-w-xl">
@@ -122,17 +100,6 @@ const Login = ({ nonce, hashedNonce }: LoginModel) => {
 
         <FieldGroup>
           <Field>
-            <div
-              id="g_id_onload"
-              data-client_id="749559163816-fnl78jvo7jvlgicdoqki4se514h1h2aa.apps.googleusercontent.com"
-              data-context="signin"
-              data-ux_mode="popup"
-              data-callback="handleSignInWithGoogle"
-              data-nonce={hashedNonce}
-              data-auto_select="true"
-              data-itp_support="true"
-            ></div>
-
             <div
               className="g_id_signin"
               data-type="standard"
