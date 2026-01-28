@@ -1,6 +1,7 @@
 "use server";
 
 import { getT } from "@/lib/i18n/server";
+import { createClient } from "@/lib/supabase/server";
 import { verifyRecaptcha } from "@/lib/utils";
 import {
   LoginFormData,
@@ -76,3 +77,17 @@ export const loginFormFunction = async (
     success: true,
   };
 };
+
+export const signInWithGoogle = async (
+  nonce: string,
+  response: google.accounts.id.CredentialResponse,
+) => {
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signInWithIdToken({
+    provider: "google",
+    token: response.credential,
+    nonce: nonce,
+  });
+
+  return { error };
+}

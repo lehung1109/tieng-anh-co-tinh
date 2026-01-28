@@ -10,27 +10,17 @@ import {
 } from "./ui/field";
 import { Button } from "./ui/button";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { startTransition, useActionState, useEffect } from "react";
-import { loginFormFunction } from "@/funcs/login-form-function";
+import { startTransition, useActionState, useEffect, useState } from "react";
+import {
+  loginFormFunction,
+  signInWithGoogle,
+} from "@/funcs/login-form-function";
 import { Spinner } from "./ui/spinner";
 import { useT } from "@/lib/i18n/client";
-import { createClient } from "@/lib/supabase/client";
 
 interface LoginModel {
   nonce: string;
   hashedNonce: string;
-}
-
-async function handleSignInWithGoogle(
-  nonce: string,
-  response: google.accounts.id.CredentialResponse,
-) {
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.signInWithIdToken({
-    provider: "google",
-    token: response.credential,
-    nonce: nonce,
-  });
 }
 
 const Login = ({ nonce, hashedNonce }: LoginModel) => {
@@ -39,6 +29,7 @@ const Login = ({ nonce, hashedNonce }: LoginModel) => {
   });
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { t } = useT();
+  const [googleError, setGoogleError] = useState<string | null>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -64,7 +55,17 @@ const Login = ({ nonce, hashedNonce }: LoginModel) => {
   };
 
   useEffect(() => {
-    window.handleSignInWithGoogle = handleSignInWithGoogle.bind(null, nonce);
+    window.handleSignInWithGoogle = (
+      response: google.accounts.id.CredentialResponse,
+    ) => {
+      signInWithGoogle(nonce, response)
+        .then(({ error }) => {
+          setGoogleError(error?.message ?? null);
+        })
+        .catch(() => {
+          setGoogleError("An error occurred while signing in with Google");
+        });
+    };
   }, [nonce]);
 
   return (
@@ -141,6 +142,15 @@ const Login = ({ nonce, hashedNonce }: LoginModel) => {
               data-size="large"
               data-logo_alignment="left"
             ></div>
+          </Field>
+
+          <Field>
+            {/* show message when error while signing in with Google */}
+            {googleError && (
+              <FieldDescription className="text-red-500">
+                {googleError}
+              </FieldDescription>
+            )}
           </Field>
         </FieldGroup>
       </form>

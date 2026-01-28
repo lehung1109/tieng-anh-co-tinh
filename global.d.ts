@@ -1,3 +1,3 @@
 interface Window {
-  handleSignInWithGoogle: (nonce: string, response: google.accounts.id.CredentialResponse) => Promise<void>;
+  handleSignInWithGoogle: (response: google.accounts.id.CredentialResponse) => void;
 }
