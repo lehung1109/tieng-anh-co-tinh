@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export async function generateStaticParams() {
-  return languages.map((lng) => ({ lng }))
+  return languages.map((lng) => ({ lng }));
 }
 
 export const metadata: Metadata = {
@@ -39,9 +39,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
-          {children}
-        </Providers>
+        <script src="https://accounts.google.com/gsi/client" async></script>
+
+        <div
+          id="g_id_onload"
+          data-client_id="749559163816-fnl78jvo7jvlgicdoqki4se514h1h2aa.apps.googleusercontent.com"
+          data-context="signin"
+          data-ux_mode="popup"
+          data-callback="handleSignInWithGoogle"
+          data-nonce=""
+          data-auto_select="true"
+          data-itp_support="true"
+        ></div>
+
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

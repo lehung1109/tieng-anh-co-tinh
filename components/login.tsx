@@ -10,10 +10,11 @@ import {
 } from "./ui/field";
 import { Button } from "./ui/button";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { startTransition, useActionState } from "react";
+import { startTransition, useActionState, useEffect } from "react";
 import { loginFormFunction } from "@/funcs/login-form-function";
 import { Spinner } from "./ui/spinner";
 import { useT } from "@/lib/i18n/client";
+import { handleSignInWithGoogle } from "@/services/login-user";
 
 const Login = () => {
   const [state, formAction, isPending] = useActionState(loginFormFunction, {
@@ -45,9 +46,15 @@ const Login = () => {
     });
   };
 
+  useEffect(() => {
+    window.handleSignInWithGoogle = handleSignInWithGoogle;
+  }, []);
+
   return (
     <div className="container max-w-xl">
-      <h1 className="text-2xl font-bold mb-10 text-center">{t("login.title")}</h1>
+      <h1 className="text-2xl font-bold mb-10 text-center">
+        {t("login.title")}
+      </h1>
 
       <form onSubmit={handleSubmit} className="relative p-5">
         {/* loading animation */}
@@ -88,8 +95,24 @@ const Login = () => {
           <Field>
             {/* show message when error */}
             {state?.message && !isPending && state.success === false && (
-              <FieldDescription className="text-red-500">{state.message}</FieldDescription>
+              <FieldDescription className="text-red-500">
+                {state.message}
+              </FieldDescription>
             )}
+          </Field>
+        </FieldGroup>
+
+        <FieldGroup>
+          <Field>
+            <div
+              className="g_id_signin"
+              data-type="standard"
+              data-shape="pill"
+              data-theme="outline"
+              data-text="signin_with"
+              data-size="large"
+              data-logo_alignment="left"
+            ></div>
           </Field>
         </FieldGroup>
       </form>

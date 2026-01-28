@@ -10,3 +10,7 @@ export async function loginUser(email: string, password: string) {
 
   return { data, error };
 }
+
+export async function handleSignInWithGoogle() {
+
+}
