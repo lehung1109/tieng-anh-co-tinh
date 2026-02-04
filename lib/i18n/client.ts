@@ -18,7 +18,7 @@ export function useT(ns?: string, options?: UseTranslationOptions<string>) {
       await i18nextPromise;
 
       if (locale && locale !== i18next.resolvedLanguage) {
-        i18next.changeLanguage(locale)
+        await i18next.changeLanguage(locale);
       }
     }
 
