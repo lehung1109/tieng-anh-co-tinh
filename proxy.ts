@@ -2,10 +2,7 @@ import { withSupabaseProxy } from "./proxy/supabaseProxy";
 import { chainProxy } from "./lib/chainProxy";
 import { i18nProxy } from "./proxy/i18nproxy";
 
-export default chainProxy([
-  withSupabaseProxy,
-  i18nProxy,
-]);
+export default chainProxy([withSupabaseProxy, i18nProxy]);
 
 export const config = {
   matcher: [
@@ -16,6 +13,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * Feel free to modify this pattern to include more paths.
      */
-    String.raw`/((?!_next/static|_next/image|favicon.ico|.*\.(?:svg|png|jpg|jpeg|gif|webp)$).*)`,
+    "/((?!_next/static|_next/image|manifest.json|favicon.ico|.*.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
-}
+};
