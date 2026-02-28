@@ -17,14 +17,14 @@ interface RegisterFormFunctionState {
 
 export const registerFormFunction = async (
   previousState: RegisterFormFunctionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<RegisterFormFunctionState> => {
   // Get reCAPTCHA token
   const captchaToken = formData.get("captchaToken") as string;
 
   if (!captchaToken) {
     return {
-      message: "Không tìm thấy token reCAPTCHA. Vui lòng thử lại.",
+      message: "Không tìm thấy token reCAPTCHA. Vui lòng thử lại sau.",
       success: false,
     };
   }
