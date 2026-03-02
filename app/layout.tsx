@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import RecaptchaProvider from "@/providers/recaptcha-provider";
 import { GoogleProvider } from "@/providers/google-provider";
 import { SWProvider } from "@/providers/sw-provider";
+import InstallPrompt from "@/components/install-prompt";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,7 +51,10 @@ export default async function RootLayout({
         <RecaptchaProvider>
           <GoogleProvider>
             <SupabaseProvider>
-              <SWProvider>{children}</SWProvider>
+              <SWProvider>
+                {children}
+                <InstallPrompt />
+              </SWProvider>
 
               <Suspense fallback={<div>Loading...</div>}>
                 <OneTap nonce={nonce} hashedNonce={hashedNonce} />

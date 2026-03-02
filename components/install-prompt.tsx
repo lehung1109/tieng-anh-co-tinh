@@ -1,9 +1,21 @@
 "use client";
 
+import { useEffect } from "react";
+
 function InstallPrompt() {
   const isIOS =
-    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
+    globalThis.window !== undefined &&
+    /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+    !globalThis.window.MSStream;
+  const isStandalone = globalThis.window?.matchMedia(
+    "(display-mode: standalone)"
+  ).matches;
+
+  useEffect(() => {
+    globalThis.window.addEventListener("beforeinstallprompt", (event) => {
+      alert("beforeinstallprompt");
+    });
+  }, []);
 
   if (isStandalone) {
     return null; // Don't show install button if already installed
