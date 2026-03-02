@@ -14,7 +14,8 @@
     "recaptchaFailed": "reCAPTCHA failed. Please try again.",
     "formValidationFailed": "Form validation failed. Please check your inputs.",
     "loginFailed": "Login failed. Please try again.",
-    "loginSuccess": "Login successful."
+    "loginSuccess": "Login successful.",
+    "installPromptDescription": "This site has app functionality. Install it on your device for extensive experience and easy access."
   },
   "header": {
     "home": "Home",

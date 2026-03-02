@@ -14,7 +14,8 @@
     "recaptchaFailed": "Xác thực reCAPTCHA thất bại. Vui lòng thử lại.",
     "formValidationFailed": "Có lỗi khi gửi yêu cầu. Vui lòng kiểm tra lại thông tin.",
     "loginFailed": "Đăng nhập thất bại. Vui lòng thử lại.",
-    "loginSuccess": "Đăng nhập thành công."
+    "loginSuccess": "Đăng nhập thành công.",
+    "installPromptDescription": "Trang web này có chức năng ứng dụng. Cài đặt nó trên thiết bị của bạn để trải nghiệm rộng và truy cập dễ dàng."
   },
   "header": {
     "home": "Trang chủ",
