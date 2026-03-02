@@ -9,7 +9,7 @@ import { Suspense } from "react";
 import RecaptchaProvider from "@/providers/recaptcha-provider";
 import { GoogleProvider } from "@/providers/google-provider";
 import { SWProvider } from "@/providers/sw-provider";
-import InstallPrompt from "@/components/install-prompt";
+import InstallPrompt from "@/components/install-prompt/install-prompt";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

@@ -17,36 +17,60 @@ export const verifyRecaptcha = async (token: string) => {
 
 export const isPublicRoute = (pathname: string): boolean => {
   const publicRoutes = [
-    '/',
-    '/signin',
-    '/signup',
-    '/about',
-    '/contact',
-    '/pricing',
-  ]
+    "/",
+    "/signin",
+    "/signup",
+    "/about",
+    "/contact",
+    "/pricing",
+  ];
 
   // Check exact match
-  if (publicRoutes.some(route => pathname.includes(route))) {
-    return true
+  if (publicRoutes.some((route) => pathname.includes(route))) {
+    return true;
   }
 
   // Check wildcard patterns (optional)
   const publicPatterns = [
-    '/blog',      // Matches /blog/*
-    '/docs',      // Matches /docs/*
-    '/public',    // Matches /public/*
-  ]
+    "/blog", // Matches /blog/*
+    "/docs", // Matches /docs/*
+    "/public", // Matches /public/*
+  ];
 
-  return publicPatterns.some(pattern => pathname.startsWith(pattern))
-}
+  return publicPatterns.some((pattern) => pathname.startsWith(pattern));
+};
 
 // generate nonce to use for google id token sign-in
 export const generateNonce = async (): Promise<string[]> => {
-  const nonce = btoa(String.fromCodePoint(...crypto.getRandomValues(new Uint8Array(32))))
-  const encoder = new TextEncoder()
-  const encodedNonce = encoder.encode(nonce)
-  const hashBuffer = await crypto.subtle.digest('SHA-256', encodedNonce)
-  const hashArray = Array.from(new Uint8Array(hashBuffer))
-  const hashedNonce = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
-  return [nonce, hashedNonce]
-}
+  const nonce = btoa(
+    String.fromCodePoint(...crypto.getRandomValues(new Uint8Array(32)))
+  );
+  const encoder = new TextEncoder();
+  const encodedNonce = encoder.encode(nonce);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", encodedNonce);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashedNonce = hashArray
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+  return [nonce, hashedNonce];
+};
+
+export const isAppleDesktop = (): boolean => {
+  // check if it's a mac
+  const userAgent = navigator.userAgent.toLowerCase();
+  if (navigator.maxTouchPoints || !new RegExp(/macintosh/).exec(userAgent))
+    return false;
+
+  // check safari version >= 17
+  const version = /version\/(\d{2})\./.exec(userAgent);
+
+  if (!version?.[1] || Number.parseInt(version[1]) < 17) return false;
+
+  // hacky way to detect Sonoma
+  const audioCheck = !!document
+    .createElement("audio")
+    .canPlayType('audio/wav; codecs="1"');
+  const webGLCheck = !!new OffscreenCanvas(1, 1).getContext("webgl");
+
+  return audioCheck && webGLCheck;
+};

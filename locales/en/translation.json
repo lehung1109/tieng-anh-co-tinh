@@ -15,5 +15,14 @@
     "formValidationFailed": "Form validation failed. Please check your inputs.",
     "loginFailed": "Login failed. Please try again.",
     "loginSuccess": "Login successful."
+  },
+  "header": {
+    "home": "Home",
+    "advantage": "Advantage",
+    "roadmap": "Roadmap",
+    "feedback": "Feedback",
+    "contact": "Contact",
+    "signup": "Signup",
+    "login": "Login"
   }
 }

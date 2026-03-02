@@ -15,5 +15,14 @@
     "formValidationFailed": "Có lỗi khi gửi yêu cầu. Vui lòng kiểm tra lại thông tin.",
     "loginFailed": "Đăng nhập thất bại. Vui lòng thử lại.",
     "loginSuccess": "Đăng nhập thành công."
+  },
+  "header": {
+    "home": "Trang chủ",
+    "advantage": "Lợi thế",
+    "roadmap": "Lộ trình",
+    "feedback": "Phản hồi",
+    "contact": "Liên hệ",
+    "signup": "Đăng ký",
+    "login": "Đăng nhập"
   }
 }
