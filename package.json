@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"bun run dev:sw\" \"next dev\"",
-    "build": "bun runbuild:sw && next build",
+    "build": "bun run build:sw && next build",
     "start": "next start",
     "lint": "eslint",
     "build:sw": "webpack --config webpack.sw.config.js",
