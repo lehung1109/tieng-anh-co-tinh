@@ -1,5 +1,4 @@
 import { Form } from "@/components/contact-form";
-import RecaptchaProvider from "@/providers/recaptcha-provider";
 
 interface Contact1Props {
   id?: string;
@@ -25,9 +24,7 @@ const Contact1 = ({ id, className }: Contact1Props) => {
           </div>
 
           <div className="mx-auto flex max-w-xl w-full flex-col gap-6 rounded-lg border p-10">
-            <RecaptchaProvider>
-              <Form />
-            </RecaptchaProvider>
+            <Form />
           </div>
         </div>
       </div>
