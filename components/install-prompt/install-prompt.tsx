@@ -16,23 +16,20 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 function InstallPrompt() {
-  const isIOS =
-    globalThis.window !== undefined &&
-    /iPad|iPhone|iPod/.test(navigator.userAgent) &&
-    !globalThis.window.MSStream;
-  const [isInstalled, setIsInstalled] = useState(
-    globalThis.window?.matchMedia("(display-mode: standalone)").matches
-  );
-  const isMacOS = globalThis.window !== undefined && isAppleDesktop();
+  const [isIOS, setIsIOS] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(false);
+  const [isMacOS, setIsMacOS] = useState(false);
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
 
   const handler = (e: BeforeInstallPromptEvent) => {
     e.preventDefault();
     setDeferredPrompt(e);
+    console.log(e);
   };
 
   const triggerInstall = async () => {
+    console.log(deferredPrompt);
     if (!deferredPrompt) return;
 
     await deferredPrompt.prompt();
@@ -43,6 +40,21 @@ function InstallPrompt() {
 
     setDeferredPrompt(null);
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setIsIOS(
+      globalThis.window !== undefined &&
+        /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+        !globalThis.window.MSStream
+    );
+
+    setIsMacOS(globalThis.window !== undefined && isAppleDesktop());
+
+    setIsInstalled(
+      globalThis.window?.matchMedia("(display-mode: standalone)").matches
+    );
+  }, []);
 
   useEffect(() => {
     globalThis.window.addEventListener(

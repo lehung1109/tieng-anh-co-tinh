@@ -26,7 +26,9 @@ const DefaultPrompt = ({
 
       <p>{t("common.installPromptDescription")}</p>
 
-      <Button onClick={triggerInstall}>Install</Button>
+      <Button onClick={triggerInstall} type="button">
+        Install
+      </Button>
     </div>
   );
 };
