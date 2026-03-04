@@ -25,7 +25,7 @@ function InstallPrompt() {
   const handler = (e: BeforeInstallPromptEvent) => {
     e.preventDefault();
     setDeferredPrompt(e);
-    console.log(e);
+    console.log("beforeinstall");
   };
 
   const triggerInstall = async () => {
@@ -69,8 +69,6 @@ function InstallPrompt() {
       );
     };
   }, []);
-
-  console.log(isIOS, isMacOS, isInstalled);
 
   if (isInstalled) {
     return null;
