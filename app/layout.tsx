@@ -53,7 +53,10 @@ export default async function RootLayout({
             <SupabaseProvider>
               <SWProvider>
                 {children}
-                <InstallPrompt />
+
+                <div className="fixed bottom-0 right-0">
+                  <InstallPrompt />
+                </div>
               </SWProvider>
 
               <Suspense fallback={<div>Loading...</div>}>

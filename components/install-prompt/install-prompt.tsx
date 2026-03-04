@@ -70,16 +70,21 @@ function InstallPrompt() {
     };
   }, []);
 
-  return (
-    !isInstalled &&
-    (isIOS ? (
-      <IosPrompt />
-    ) : isMacOS ? (
-      <MacOSPrompt />
-    ) : (
-      <DefaultPrompt triggerInstall={triggerInstall} />
-    ))
-  );
+  console.log(isIOS, isMacOS, isInstalled);
+
+  if (isInstalled) {
+    return null;
+  }
+
+  if (isIOS && !isMacOS) {
+    return <IosPrompt />;
+  }
+
+  if (isMacOS) {
+    return <MacOSPrompt />;
+  }
+
+  return <DefaultPrompt triggerInstall={triggerInstall} />;
 }
 
 export default InstallPrompt;
