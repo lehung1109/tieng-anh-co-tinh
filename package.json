@@ -43,7 +43,7 @@
     "@types/nodemailer": "^7.0.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "eslint": "^10",
     "eslint-config-next": "16.1.1",
     "nodemailer": "^9.0.1",
     "react-google-recaptcha-v3": "^1.11.0",
